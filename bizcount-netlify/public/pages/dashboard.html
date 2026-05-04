@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard — BizCount</title>
+  <link rel="stylesheet" href="/css/style.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body class="dashboard-body" data-page="dashboard">
+
+<!-- HEADER -->
+<header class="main-header" id="mainHeader">
+  <div class="header-inner">
+    <a href="/pages/dashboard.html" class="logo">
+      <span class="logo-icon"><i class="fa-solid fa-chart-line"></i></span>
+      <span class="logo-text">Biz<strong>Count</strong></span>
+    </a>
+    <div style="flex:1;display:flex;align-items:center;gap:12px;justify-content:flex-end;">
+      <span class="business-name-el" style="font-size:.82rem;color:var(--text-muted)"></span>
+      <div class="header-controls">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <span class="theme-icon light-icon"><i class="fa-solid fa-sun"></i></span>
+          <span class="theme-icon dark-icon"><i class="fa-solid fa-moon"></i></span>
+        </button>
+        <button id="logoutBtn" class="btn btn-ghost btn-sm">
+          <i class="fa-solid fa-right-from-bracket"></i> Logout
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="dashboard-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-user">
+      <div class="user-avatar user-avatar-el" style="background:linear-gradient(135deg,var(--brand-primary),var(--brand-accent));color:white;font-weight:700;font-size:.95rem;display:flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:10px;flex-shrink:0"></div>
+      <div class="user-info-text">
+        <div class="user-name user-name-el" style="font-size:.9rem;font-weight:700;color:var(--text-primary)"></div>
+        <div class="user-role" style="font-size:.72rem;color:var(--text-muted)">Owner</div>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Main</div>
+      <a href="?page=overview"      class="sidebar-link"><i class="fa-solid fa-house"></i> Overview</a>
+      <a href="?page=sales"         class="sidebar-link"><i class="fa-solid fa-cash-register"></i> Sales</a>
+      <a href="?page=expenses"      class="sidebar-link"><i class="fa-solid fa-receipt"></i> Expenses</a>
+      <a href="?page=reports"       class="sidebar-link"><i class="fa-solid fa-chart-bar"></i> Reports</a>
+      <div class="nav-section-label">Inventory</div>
+      <a href="?page=products"      class="sidebar-link"><i class="fa-solid fa-box"></i> Products</a>
+      <a href="?page=stock"         class="sidebar-link"><i class="fa-solid fa-boxes-stacked"></i> Stock</a>
+      <div class="nav-section-label">Team</div>
+      <a href="?page=staff"         class="sidebar-link"><i class="fa-solid fa-users"></i> Staff</a>
+      <a href="?page=tasks"         class="sidebar-link"><i class="fa-solid fa-list-check"></i> Tasks</a>
+      <div class="nav-section-label">Account</div>
+      <a href="?page=subscription"  class="sidebar-link"><i class="fa-solid fa-credit-card"></i> Subscription</a>
+      <a href="?page=settings"      class="sidebar-link"><i class="fa-solid fa-gear"></i> Settings</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div id="subStatusBadge" class="status-badge status-info" style="font-size:.72rem;padding:4px 10px">
+        <i class="fa-solid fa-circle" style="font-size:.5rem"></i> Loading...
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+    <!-- Subscription banner -->
+    <div id="subBanner" style="display:none"></div>
+
+    <!-- Dynamic page content injected here by app.js -->
+    <div id="pageContent">
+      <div style="padding:60px;text-align:center">
+        <i class="fa-solid fa-spinner fa-spin fa-2x" style="color:var(--brand-primary)"></i>
+        <p style="margin-top:16px;color:var(--text-muted)">Loading your dashboard…</p>
+      </div>
+    </div>
+  </main>
+
+</div><!-- end dashboard-layout -->
+
+<script src="/js/app.js"></script>
+<script>
+  // Update sidebar subscription badge after load
+  (async function() {
+    const res = await apiGet('/.netlify/functions/subscription');
+    const badge = document.getElementById('subStatusBadge');
+    if (!badge) return;
+    const colors = { trial: 'status-warning', active: 'status-success', expired: 'status-danger' };
+    badge.className = `status-badge ${colors[res.status] || 'status-neutral'}`;
+    badge.innerHTML = `<i class="fa-solid fa-circle" style="font-size:.5rem"></i> ${res.status === 'trial' ? 'Trial Active' : res.status === 'active' ? 'Subscription Active' : 'Expired'}`;
+  })();
+</script>
+</body>
+</html>

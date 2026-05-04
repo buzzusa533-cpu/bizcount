@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login — BizCount</title>
+  <link rel="stylesheet" href="/css/style.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body class="auth-page" data-page="login">
+
+<header class="main-header" id="mainHeader">
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <span class="logo-icon"><i class="fa-solid fa-chart-line"></i></span>
+      <span class="logo-text">Biz<strong>Count</strong></span>
+    </a>
+    <nav class="main-nav" id="mainNav">
+      <a href="/#features">Features</a>
+      <a href="/#pricing">Pricing</a>
+      <a href="/pages/register.html" class="btn btn-primary btn-sm">Start Free Trial</a>
+    </nav>
+    <div class="header-controls">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span class="theme-icon light-icon"><i class="fa-solid fa-sun"></i></span>
+        <span class="theme-icon dark-icon"><i class="fa-solid fa-moon"></i></span>
+      </button>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main class="auth-main login-main">
+  <div class="auth-left">
+    <div class="auth-promo">
+      <div class="promo-badge"><i class="fa-solid fa-shield-halved"></i> Secure Login</div>
+      <h2>Welcome back to your business dashboard.</h2>
+      <p class="promo-desc">Log in to track your sales, check your profits, and manage your team — all from one place.</p>
+      <div class="login-stats">
+        <div class="login-stat">
+          <span class="login-stat-num">500+</span>
+          <span class="login-stat-label">Businesses</span>
+        </div>
+        <div class="login-stat">
+          <span class="login-stat-num">99.9%</span>
+          <span class="login-stat-label">Uptime</span>
+        </div>
+        <div class="login-stat">
+          <span class="login-stat-num">KES 200</span>
+          <span class="login-stat-label">Per Week</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="auth-right">
+    <div class="auth-card">
+      <div class="auth-card-header">
+        <h1>Sign In</h1>
+        <p>Enter your credentials to access your dashboard.</p>
+      </div>
+
+      <div class="alert alert-error" id="loginError" style="display:none"></div>
+
+      <!-- Role selector -->
+      <div class="role-tabs">
+        <button class="role-tab active" data-role="owner" id="tabOwner">
+          <i class="fa-solid fa-user-tie"></i> Owner
+        </button>
+        <button class="role-tab" data-role="staff" id="tabStaff">
+          <i class="fa-solid fa-user"></i> Staff
+        </button>
+      </div>
+
+      <input type="hidden" id="roleInput" value="owner"/>
+
+      <form class="auth-form" id="loginForm" novalidate>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <div class="input-wrap">
+            <i class="fa-solid fa-envelope input-icon"></i>
+            <input type="email" id="email" name="email" placeholder="your@email.com" required autocomplete="email"/>
+          </div>
+          <span class="field-error" id="err_email"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="password">
+            Password
+            <a href="#" class="forgot-link">Forgot password?</a>
+          </label>
+          <div class="input-wrap">
+            <i class="fa-solid fa-lock input-icon"></i>
+            <input type="password" id="password" name="password" placeholder="Your password" required autocomplete="current-password"/>
+            <button type="button" class="pw-toggle" onclick="togglePw('password','pwIcon')" tabindex="-1">
+              <i class="fa-solid fa-eye" id="pwIcon"></i>
+            </button>
+          </div>
+          <span class="field-error" id="err_password"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-full btn-lg" id="submitBtn">
+          <i class="fa-solid fa-right-to-bracket"></i> Sign In
+        </button>
+      </form>
+
+      <div class="auth-divider"><span>or</span></div>
+
+      <div class="auth-footer-link">
+        Don't have an account? <a href="/pages/register.html" class="link">Start your free trial</a>
+      </div>
+
+      <div class="staff-note" id="staffNote" style="display:none">
+        <i class="fa-solid fa-circle-info"></i>
+        Staff accounts are created by the business owner. Contact your owner if you need access.
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="/js/app.js"></script>
+</body>
+</html>

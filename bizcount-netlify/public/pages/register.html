@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register — BizCount</title>
+  <link rel="stylesheet" href="/css/style.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body class="auth-page" data-page="register">
+
+<header class="main-header" id="mainHeader">
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <span class="logo-icon"><i class="fa-solid fa-chart-line"></i></span>
+      <span class="logo-text">Biz<strong>Count</strong></span>
+    </a>
+    <nav class="main-nav" id="mainNav">
+      <a href="/#features">Features</a>
+      <a href="/#pricing">Pricing</a>
+      <a href="/pages/login.html" class="nav-login">Login</a>
+    </nav>
+    <div class="header-controls">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span class="theme-icon light-icon"><i class="fa-solid fa-sun"></i></span>
+        <span class="theme-icon dark-icon"><i class="fa-solid fa-moon"></i></span>
+      </button>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main class="auth-main">
+  <div class="auth-left">
+    <div class="auth-promo">
+      <div class="promo-badge"><i class="fa-solid fa-gift"></i> 7 Days Free</div>
+      <h2>Start managing your business smarter today.</h2>
+      <ul class="promo-list">
+        <li><i class="fa-solid fa-check-circle"></i> Track daily sales instantly</li>
+        <li><i class="fa-solid fa-check-circle"></i> Manage staff with ease</li>
+        <li><i class="fa-solid fa-check-circle"></i> Monitor profits &amp; stock</li>
+        <li><i class="fa-solid fa-check-circle"></i> Pay only KES 200/week after trial</li>
+      </ul>
+      <div class="promo-trust">
+        <span><i class="fa-solid fa-lock"></i> 100% Secure</span>
+        <span><i class="fa-solid fa-mobile-screen-button"></i> M-Pesa Payments</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="auth-right">
+    <div class="auth-card">
+      <div class="auth-card-header">
+        <h1>Create Your Account</h1>
+        <p>No credit card needed. 7-day free trial starts immediately.</p>
+      </div>
+
+      <div class="alert alert-error" id="regError" style="display:none"></div>
+
+      <form class="auth-form" id="registerForm" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="first_name">First Name</label>
+            <div class="input-wrap">
+              <i class="fa-solid fa-user input-icon"></i>
+              <input type="text" id="first_name" name="first_name" placeholder="John" required autocomplete="given-name"/>
+            </div>
+            <span class="field-error" id="err_first_name"></span>
+          </div>
+          <div class="form-group">
+            <label for="last_name">Last Name</label>
+            <div class="input-wrap">
+              <i class="fa-solid fa-user input-icon"></i>
+              <input type="text" id="last_name" name="last_name" placeholder="Kamau" required autocomplete="family-name"/>
+            </div>
+            <span class="field-error" id="err_last_name"></span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="business_name">Business Name</label>
+          <div class="input-wrap">
+            <i class="fa-solid fa-store input-icon"></i>
+            <input type="text" id="business_name" name="business_name" placeholder="Kamau General Store" required/>
+          </div>
+          <span class="field-error" id="err_business_name"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <div class="input-wrap">
+            <i class="fa-solid fa-envelope input-icon"></i>
+            <input type="email" id="email" name="email" placeholder="john@example.com" required autocomplete="email"/>
+          </div>
+          <span class="field-error" id="err_email"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone Number (M-Pesa)</label>
+          <div class="input-wrap">
+            <i class="fa-solid fa-phone input-icon"></i>
+            <input type="tel" id="phone" name="phone" placeholder="0712345678" required autocomplete="tel"/>
+          </div>
+          <span class="field-error" id="err_phone"></span>
+          <span class="field-hint">Used for M-Pesa subscription payments</span>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="input-wrap">
+            <i class="fa-solid fa-lock input-icon"></i>
+            <input type="password" id="password" name="password" placeholder="Create a strong password" required autocomplete="new-password"/>
+            <button type="button" class="pw-toggle" onclick="togglePw('password','pwIcon1')" tabindex="-1">
+              <i class="fa-solid fa-eye" id="pwIcon1"></i>
+            </button>
+          </div>
+          <div class="pw-strength"><div class="pw-bar" id="pwBar"></div></div>
+          <span class="field-error" id="err_password"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="confirm_password">Confirm Password</label>
+          <div class="input-wrap">
+            <i class="fa-solid fa-lock input-icon"></i>
+            <input type="password" id="confirm_password" name="confirm_password" placeholder="Repeat your password" required autocomplete="new-password"/>
+            <button type="button" class="pw-toggle" onclick="togglePw('confirm_password','pwIcon2')" tabindex="-1">
+              <i class="fa-solid fa-eye" id="pwIcon2"></i>
+            </button>
+          </div>
+          <span class="field-error" id="err_confirm_password"></span>
+        </div>
+
+        <div class="form-group checkbox-group">
+          <label class="checkbox-label">
+            <input type="checkbox" name="terms" id="terms" required/>
+            <span class="checkmark"></span>
+            I agree to the <a href="#" class="link">Terms of Service</a> and <a href="#" class="link">Privacy Policy</a>
+          </label>
+          <span class="field-error" id="err_terms"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-full btn-lg" id="submitBtn">
+          <i class="fa-solid fa-rocket"></i> Create My Account
+        </button>
+      </form>
+
+      <div class="auth-footer-link">
+        Already have an account? <a href="/pages/login.html" class="link">Sign in here</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="/js/app.js"></script>
+</body>
+</html>
